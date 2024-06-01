@@ -1,28 +1,30 @@
 // TODO
-// - collision by radius
-//   - drawPlanet
-//   - appro. non-diss. collision
 // - test centripetal
 // - OOP
 
 const canvas = document.getElementById("gameCanvas");
-
 const ctx = canvas.getContext("2d");
 
-let x1 = 50;
+// planet parameters
+let x1 = 50; // m
 let y1 = 40;
+let rad1 = 20; // visual only
 let x2 = 167;
 let y2 = 267;
+let rad2 = 10; 
+let m1 = 100000000000; // kg
+let m2 = 10000000000;
 
+// planet references (can be removed when OOP integrated)
 let minX1 = 0;
 let minY1 = 0;
 let minX2 = 0;
 let minY2 = 0;
 
-let m1 = 90000000000;
-let m2 = 40000000000;
+// time in seconds
+let timer = 0;
 
-let timer = 0; // time in seconds
+// GAME LOOP METHODS
 
 const clear = () => {
   ctx.fillStyle = "black";
@@ -35,7 +37,9 @@ const update = () => {
   // - m1 feels positive
   // - m2 feels negative
   let dist = calculateDistance(x1, y1, x2, y2);
-  if (dist > 5) {
+  let avgRad = (rad1 + rad2) / 2; 
+
+  if (dist > avgRad / 2) {
 
     let ang = calculateAngle(x1, y1, x2, y2);
     let rad = ang*(Math.PI/180); 
@@ -72,7 +76,6 @@ const update = () => {
     // get x and y comp in quad 2
     else if (ang > 90 && ang <= 180) {
       // convert to acute angle
-
       let newAng = 90 - ang;
       rad = newAng*(Math.PI/180);
 
@@ -114,10 +117,9 @@ const update = () => {
       a1y = f1y/m1;
       a2y = -f2y/m2;
     }
-    
-    // let a1 = f1/m1;
-    // let a2 = -1*(f2/m2);
 
+    // update x based on timer
+    // kinematics: delta_x = 0.5 * a * t^2
     let updateX1 = (0.5)*(a1x)*((timer*timer));
     let updateX2 = (0.5)*(a2x)*((timer*timer));
     let updateY1 = (0.5)*(a1y)*((timer*timer));
@@ -127,16 +129,6 @@ const update = () => {
     x2 = x2 + updateX2;
     y1 = y1 + updateY1;
     y2 = y2 + updateY2;
-    
-
-    // update x based on timer
-    // delta_x = 0.5 * a * t^2
-    // let updateX1 = 0.5*a1*(timer^2);
-    // let updateX2 = 0.5*a2*(timer^2);
-    // console.log("x1: " + updateX1);
-    // console.log("x2: " + updateX2);
-    // x1 = x1 + updateX1;
-    // x2 = x2 + updateX2;
   }
 }
 
@@ -147,23 +139,20 @@ const main = () => {
 }
 setInterval(main, 1);
 
-// graphics
+// GRAPHICS
 
 const draw = () => {
-  ctx.fillStyle = "red";
-  ctx.fillRect(x1,y1,20,20);
-  ctx.fillStyle = "blue";
-  ctx.fillRect(x2,y2,20,20);
+  drawPlanet("red", x1, y1, rad1); 
+  drawPlanet("blue", x2, y2, rad2); 
 }
 
 // arcs too comp. intensive
 const drawPlanet = (color,x,y,radius) => {
+  ctx.beginPath(); 
   ctx.fillStyle = color;
   ctx.arc(x,y,radius,0,Math.PI*2,false);
   ctx.fill();
 }
-
-
 
 // physics
 
