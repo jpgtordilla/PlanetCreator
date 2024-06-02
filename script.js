@@ -1,19 +1,15 @@
-// TODO
-// - test centripetal
-// - OOP
-
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 // planet parameters
-let x1 = 50; // m
-let y1 = 40;
+let x1 = 150; // m
+let y1 = 150;
 let rad1 = 20; // visual only
-let x2 = 167;
-let y2 = 267;
+let x2 = 280;
+let y2 = 150;
 let rad2 = 10; 
-let m1 = 100000000000; // kg
-let m2 = 10000000000;
+let m1 = 1000000000000; // kg
+let m2 = 1000000000;
 
 // planet references (can be removed when OOP integrated)
 let minX1 = 0;
@@ -58,6 +54,9 @@ const update = () => {
     let a1y = 0;
     let a2x = 0;
     let a2y = 0; 
+
+    // intial velocity
+    let vi = 1.3; 
 
     // update vectors based on quad
     if (ang >= 0 && ang <= 90) {
@@ -123,7 +122,7 @@ const update = () => {
     let updateX1 = (0.5)*(a1x)*((timer*timer));
     let updateX2 = (0.5)*(a2x)*((timer*timer));
     let updateY1 = (0.5)*(a1y)*((timer*timer));
-    let updateY2 = (0.5)*(a2y)*((timer*timer));
+    let updateY2 = vi*timer + (0.5)*(a2y)*((timer*timer));
 
     x1 = x1 + updateX1;
     x2 = x2 + updateX2;
