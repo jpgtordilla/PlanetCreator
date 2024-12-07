@@ -7,3 +7,5 @@ Computes gravitational force and consequently acceleration between two point par
 **Demo**
 
 ![gravity-demo](https://github.com/user-attachments/assets/67210abf-c517-45e8-bd15-ffc53663fd1a)
+
+Future additions may include adding an additional input to change the initial velocity vector of the "smaller" particle. 
