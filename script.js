@@ -1,6 +1,12 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+let bigMassInput = document.getElementById("big"); 
+let smallMassInput = document.getElementById("small"); 
+let submitButton = document.getElementById("submit"); 
+
+submitButton.addEventListener("click", getInput); 
+
 // planet parameters
 let x1 = 150; // m
 let y1 = 150;
@@ -8,8 +14,31 @@ let rad1 = 20; // visual only
 let x2 = 280;
 let y2 = 150;
 let rad2 = 10; 
-let m1 = 1000000000000; // kg
-let m2 = 1000000000;
+let m1 = 10*10**11; // kg
+let m2 = 10*10**8; 
+
+// get input values every frame
+function getInput() {
+  if (bigMassInput.value != 0 && smallMassInput.value != 0) {
+    m1 = bigMassInput.value * 10**11; 
+    m2 = smallMassInput.value * 10**8; 
+    resetVals(); 
+  }
+} 
+
+function resetVals() {
+  x1 = 150; 
+  y1 = 150;
+  rad1 = 20; 
+  x2 = 280;
+  y2 = 150;
+  rad2 = 10; 
+  minX1 = 0;
+  minY1 = 0;
+  minX2 = 0;
+  minY2 = 0;
+  timer = 0;
+}
 
 // planet references (can be removed when OOP integrated)
 let minX1 = 0;
