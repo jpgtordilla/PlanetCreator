@@ -7,9 +7,20 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>forces</h1>
+  <h1>2D Gravity Simulator</h1>
+  <div class="questions">
+    <fieldset>
+      <legend>What should the mass be for the <strong>bigger</strong> object?</legend>
+      <input id="big" type="number" min="1"/> <label> x10<sup>11</sup></label>
+    </fieldset>
+    <fieldset>
+      <legend>What should the mass be for the <strong>smaller</strong> object?</legend>
+      <input id="small" type="number" min="1"/> <label> x10<sup>8</sup></label>
+    </fieldset>
+    <button id="submit">Submit</button>
+  </div>
   <div id="test"></div>
-  <canvas width="500" height="500" id="gameCanvas"></canvas>
+  <canvas width="300" height="300" id="gameCanvas"></canvas>
   <script src="script.js"></script>
 </body>
 </html>
