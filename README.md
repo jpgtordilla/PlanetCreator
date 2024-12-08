@@ -1,4 +1,4 @@
-Created this planet simulation while waiting in line at Disneyland on my phone. Needless to say, debugging was quite challenging. 
+Created this planet simulation while waiting in line at Disneyland on my phone. No external libraries were used and relavant point particle kinematics and dynamics equations were implemented using JavaScript and the built-in canvas API. _No external libraries were used_. 
 
 Form elements and some other touch-ups were added later on a computer. 
 
